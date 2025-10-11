@@ -6,15 +6,16 @@ SELECT * FROM observations;
 
 -- MISSION 1
 -- Your query here;
-select * FROM climate LIMIT 10;
+SELECT * FROM climate 
+LIMIT 10;
 
 -- MISSION 2
 -- Your query here;
-select DISTINCT "region_id" FROM regions;
+SELECT DISTINCT "region_id" FROM regions;
 
 -- MISSION 3
 -- Your query here;
-select DISTINCT COUNT("species_id") FROM species;
+SELECT DISTINCT COUNT("species_id") FROM species;
 
 -- MISSION 4
 -- Your query here;
@@ -44,4 +45,37 @@ LIMIT 5;
 SELECT * 
 FROM observations
 GROUP BY  species_id
-HAVING COUNT(species_id)<5;
+HAVING COUNT(species_id)<5
+ORDER BY observation_count ASC;
+
+-- MISSION 9
+-- Your query here;
+SELECT observer, COUNT(*) AS total
+FROM observations
+GROUP BY observer
+ORDER BY total DESC
+
+-- MISSION 10
+-- Your query here;
+SELECT observations.id, regions.name AS region_name, observations.observation_date
+FROM observations
+JOIN regions ON observations.region_id = regions.id;
+
+-- MISSION 11
+-- Your query here;
+SELECT observations.id, species.scientific_name 
+FROM observations
+JOIN species ON observations.species_id = species.id;
+
+-- MISSION 12
+-- Your query here;
+SELECT regions.name AS region_name, species.common_name AS specie_name, COUNT(*) AS total_observations
+FROM observations
+JOIN regions ON observations.region_id = regions.id
+JOIN species ON observations.species_id = species.id
+GROUP BY regions.name, species.common_name
+ORDER BY regions.name, total_observations DESC;
+
+
+
+
